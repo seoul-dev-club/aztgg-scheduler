@@ -116,12 +116,17 @@ public abstract class TechArticleRssCollectorService {
         return Map.of();
     }
 
+    protected String userAgent() {
+        return "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
+    }
+
     private Document fetchDocument(String url) throws Exception {
         HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                 .uri(URI.create(url))
-                .header("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+                .header("User-Agent", userAgent())
                 .header("Accept", "application/rss+xml, application/xml, text/xml, */*")
                 .header("Accept-Language", "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7")
+                .header("Accept-Encoding", "identity")
                 .GET();
         additionalHeaders().forEach(requestBuilder::header);
 
@@ -175,7 +180,7 @@ public abstract class TechArticleRssCollectorService {
             sb.append("\n");
         }
         discordWebhookSender.sendDiscordMessage(
-                WebhookType.NOTICE,
+                WebhookType.TECH_ARTICLE,
                 String.format("[%s] 새 테크 아티클 %d건", sourceType.getKorean(), articles.size()),
                 sb.toString(),
                 "#5865F2"

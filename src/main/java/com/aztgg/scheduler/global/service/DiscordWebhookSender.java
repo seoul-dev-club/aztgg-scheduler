@@ -20,6 +20,8 @@ public class DiscordWebhookSender {
     @Value("${discord.webhook.notice-url}")
     private String noticeWebhookUrl;
     private String hotIssueWebhookUrl;
+    @Value("${discord.webhook.tech-article-url}")
+    private String techArticleWebhookUrl;
 
     public DiscordWebhookSender(ProfileUtils profileUtils) {
         this.profileUtils = profileUtils;
@@ -29,6 +31,7 @@ public class DiscordWebhookSender {
         String webhookUrl = switch(type){
             case NOTICE -> noticeWebhookUrl;
             case HOTISSUE -> hotIssueWebhookUrl;
+            case TECH_ARTICLE -> techArticleWebhookUrl;
         };
 
         Map<String, Object> embed = Map.of(

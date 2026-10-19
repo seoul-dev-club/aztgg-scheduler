@@ -15,7 +15,16 @@ public class WoowahanTechCollectorService extends TechArticleRssCollectorService
     }
 
     @Override
+    protected String userAgent() {
+        return "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
+    }
+
+    @Override
     protected Map<String, String> additionalHeaders() {
-        return Map.of("Referer", "https://techblog.woowahan.com/");
+        return Map.of(
+                "Referer", "https://techblog.woowahan.com/",
+                "Connection", "keep-alive",
+                "Cache-Control", "no-cache"
+        );
     }
 }
