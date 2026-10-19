@@ -14,7 +14,6 @@ public class TechArticleScheduler {
     private final GeekNewsCollectorService geekNewsCollectorService;
     private final KoreanFeCollectorService koreanFeCollectorService;
     private final KakaoTechCollectorService kakaoTechCollectorService;
-    private final WoowahanTechCollectorService woowahanTechCollectorService;
     private final DaangnTechCollectorService daangnTechCollectorService;
     private final TossTechCollectorService tossTechCollectorService;
 
@@ -30,7 +29,6 @@ public class TechArticleScheduler {
         geekNewsCollectorService.collectWithRetry();
         koreanFeCollectorService.collectWithRetry();
         kakaoTechCollectorService.collectWithRetry();
-        woowahanTechCollectorService.collectWithRetry();
         daangnTechCollectorService.collectWithRetry();
         tossTechCollectorService.collectWithRetry();
     }
